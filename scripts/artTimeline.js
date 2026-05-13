@@ -5,32 +5,36 @@ let centuries = [
     { label: "19th Century", url: "https://api.artic.edu/api/v1/artworks/search?query[range][date_start][gte]=1800&query[range][date_start][lte]=1899&fields=id,title,date_start,artist_title,image_id&limit=20" },
     { label: "20th Century", url: "https://api.artic.edu/api/v1/artworks/search?query[range][date_start][gte]=1900&query[range][date_start][lte]=1999&fields=id,title,date_start,artist_title,image_id&limit=20" }
 ]
-fetch("https://api.artic.edu/api/v1/artworks?fields=title,date_start,artist_title,image_id&limit=100")
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        let artworks = data.data
-        let container = document.getElementById("artwork-container")
 
-        let centuryGroups = {}
+let container = document.getElementById("artwork-container")
 
-        artworks.forEach(function(artwork){
-            if (!artwork.date_start){
-                return 
-            }
-            let year = artwork.date_start
-            let century = Math.floor(year/100) + 1
-            
-            if (!centuryGroups[century]){
-                centuryGroups[century] = []
-            }
-            centuryGroups[century].push(artwork)
+Promise.all(centuries.map(function (century) {
+    return fetch(century.url)
+        .then(function (response) {
+            return response.json()
         })
-        console.log(centuryGroups)
+        .then(function (data) {
+            return { label: century.label, artworks: data.data }
+        })
+}))
+    .then(function (results) {
+        results.forEach(function (century) {
+            let section = document.createElement("div")
+            section.innerHTML = "<h2>" + century.label + "</h2>"
 
-        
+            century.artworks.forEach(function (artwork) {
+                let card = document.createElement("div")
+                card.innerText = artwork.title
+                section.appendChild(card)
+
+                let image = document.createElement("img")
+                image.src = "https://www.artic.edu/iiif/2/" + artwork.image_id + "/full/400,/0/default.jpg"
+                card.appendChild(image)
+            })
+
+            container.appendChild(section)
+        })
     })
-    .catch(function(error){
+    .catch(function (error) {
         console.log("Something went wrong:", error)
     })
