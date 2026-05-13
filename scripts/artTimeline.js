@@ -25,11 +25,11 @@ Promise.all(centuries.map(function (century) {
             century.artworks.forEach(function (artwork) {
                 let card = document.createElement("div")
                 card.innerText = artwork.title
-                section.appendChild(card)
-
                 let image = document.createElement("img")
+                
                 image.src = "https://www.artic.edu/iiif/2/" + artwork.image_id + "/full/400,/0/default.jpg"
                 card.appendChild(image)
+                section.appendChild(card)
             })
 
             container.appendChild(section)
