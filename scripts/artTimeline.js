@@ -8,11 +8,39 @@ let centuries = [
 
 let container = document.getElementById("artwork-container")
 
-function showDetail(id){
+function showDetail(id) {
     let timelineView = document.getElementById("timeline-view")
     let detailView = document.getElementById("detail-view")
     timelineView.style.display = "none"
     detailView.style.display = "block"
+
+    fetch("https://api.artic.edu/api/v1/artworks/" + id + "?fields=id,title,date_start,artist_title,artist_id,image_id,medium_display,place_of_origin")
+        .then(function(response) {
+            return response.json()
+        })
+        .then(function(data) {
+            let artwork = data.data
+            detailView.innerHTML = `
+                <button id="back-btn">← Back to Gallery</button>
+                <h2>${artwork.title}</h2>
+                <p><strong>Artist:</strong> <span id="artist-link">${artwork.artist_title || "Unknown"}</span></p>
+                <p><strong>Date:</strong> ${artwork.date_start || "Unknown"}</p>
+                <p><strong>Medium:</strong> ${artwork.medium_display || "Unknown"}</p>
+                <p><strong>Origin:</strong> ${artwork.place_of_origin || "Unknown"}</p>
+                <img src="https://www.artic.edu/iiif/2/${artwork.image_id}/full/800,/0/default.jpg" />
+            `
+            document.getElementById("back-btn").addEventListener("click", function() {
+                detailView.style.display = "none"
+                timelineView.style.display = "block"
+            })
+
+            document.getElementById("artist-link").addEventListener("click", function() {
+                showArtist(artwork.artist_id)
+            })
+        })
+        .catch(function(error) {
+            detailView.innerHTML = "<p>Could not load artwork details. Please try again.</p>"
+        })
 }
 
 Promise.all(centuries.map(function (century) {
