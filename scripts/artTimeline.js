@@ -8,6 +8,13 @@ let centuries = [
 
 let container = document.getElementById("artwork-container")
 
+function showDetail(id){
+    let timelineView = document.getElementById("timeline-view")
+    let detailView = document.getElementById("detail-view")
+    timelineView.style.display = "none"
+    detailView.style.display = "block"
+}
+
 Promise.all(centuries.map(function (century) {
     return fetch(century.url)
         .then(function (response) {
@@ -25,8 +32,17 @@ Promise.all(centuries.map(function (century) {
             century.artworks.forEach(function (artwork) {
                 let card = document.createElement("div")
                 card.innerText = artwork.title
+
+                card.addEventListener("click", function(){
+                    showDetail(artwork.id)
+                })
+
                 let image = document.createElement("img")
                 
+                if(!artwork.image_id) {
+                    return
+                }
+
                 image.src = "https://www.artic.edu/iiif/2/" + artwork.image_id + "/full/400,/0/default.jpg"
                 card.appendChild(image)
                 section.appendChild(card)
@@ -36,5 +52,5 @@ Promise.all(centuries.map(function (century) {
         })
     })
     .catch(function (error) {
-        console.log("Something went wrong:", error)
+        container.innerHTML = "<p>Could not load art. Please try again later.</p>"
     })
