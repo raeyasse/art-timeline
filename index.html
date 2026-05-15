@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art Timeline | Main</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="stylesheet" href="styles/default.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art Timeline</title>
+  <link rel="stylesheet" href="styles/default.css" />
+  <link rel="icon" href="images/favicon.png">
 </head>
-
 <body>
-    <header>
-        <h1>Art Timeline</h1>
-    </header>
-    <main>
-        <div id="timeline-view">
-            <div id="artwork-container">
 
-            </div>
+  <header>
+    <h1>Art Timeline</h1>
+  </header>
+
+  <main>
+    <!-- ① TIMELINE OVERVIEW -->
+    <div id="timeline-view">
+      <div id="artwork-container"></div>
+    </div>
+
+    <!-- ② GALLERY OVERLAY (century expanded) -->
+    <div id="gallery-overlay">
+      <div class="gallery-header">
+        <div>
+          <h2 id="gallery-title"></h2>
+          <span class="date-range" id="gallery-dates"></span>
         </div>
+        <button class="gallery-close" id="gallery-close-btn">✕</button>
+      </div>
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
 
-        <div id="detail-view">
-            
-        </div>
+    <!-- ③ DETAIL VIEW (single artwork) -->
+    <div id="detail-view"></div>
 
-        <div id="artist-view">
+    <!-- ④ ARTIST VIEW -->
+    <div id="artist-view"></div>
+  </main>
+  <footer>© 2026 rassefa All Rights Reserved.</footer>
 
-        </div>
-
-    </main>
-    <footer></footer>
-    <script src="scripts/artTimeline.js"></script>
+  <script src="scripts/artTimeline.js"></script>
 </body>
-
 </html>
