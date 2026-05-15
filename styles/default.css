@@ -638,10 +638,6 @@ footer {
 @media (max-width: 900px) {
   header { padding: 22px 20px; }
 
-  #gallery-overlay {
-    overflow-y: auto;
-  }
-
   #artwork-container {
     flex-direction: column;
     align-items: stretch;
@@ -667,9 +663,9 @@ footer {
     inset: auto;
     z-index: 0;
     height: auto;
-    min-height: auto;
-    overflow: visible;
-    padding: 20px 20px 96px;
+    min-height: calc(100vh - 110px);
+    overflow-y: auto;
+    padding: 20px 20px 80px;
   }
 
   .gallery-grid::before { display: none; }
