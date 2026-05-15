@@ -89,6 +89,7 @@ Promise.all(centuries.map(function (century) {
 
             century.artworks.forEach(function (artwork) {
                 let card = document.createElement("div")
+                card.className = "artwork-card"
                 card.innerText = artwork.title
 
                 card.addEventListener("click", function(){
