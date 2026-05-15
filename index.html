@@ -14,30 +14,31 @@
   </header>
 
   <main>
-    <!-- ① TIMELINE OVERVIEW -->
+    <!-- TIMELINE OVERVIEW -->
     <div id="timeline-view">
       <div id="artwork-container"></div>
     </div>
 
-    <!-- ② GALLERY OVERLAY (century expanded) -->
+    <!-- GALLERY OVERLAY (century expanded) -->
     <div id="gallery-overlay">
       <div class="gallery-header">
         <div>
           <h2 id="gallery-title"></h2>
           <span class="date-range" id="gallery-dates"></span>
         </div>
-        <button class="gallery-close" id="gallery-close-btn">✕</button>
+        <button class="gallery-close" id="gallery-close-btn" aria-label="Close gallery">&times;</button>
       </div>
       <div class="gallery-grid" id="gallery-grid"></div>
+      <footer class="view-footer">&copy; 2026 rassefa All Rights Reserved.</footer>
     </div>
 
-    <!-- ③ DETAIL VIEW (single artwork) -->
+    <!-- DETAIL VIEW (single artwork) -->
     <div id="detail-view"></div>
 
-    <!-- ④ ARTIST VIEW -->
+    <!-- ARTIST VIEW -->
     <div id="artist-view"></div>
   </main>
-  <footer>© 2026 rassefa All Rights Reserved.</footer>
+  <footer>&copy; 2026 rassefa All Rights Reserved.</footer>
 
   <script src="scripts/artTimeline.js"></script>
 </body>
