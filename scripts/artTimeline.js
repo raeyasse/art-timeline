@@ -33,13 +33,43 @@ function showDetail(id) {
                 detailView.style.display = "none"
                 timelineView.style.display = "block"
             })
-
+            if (artwork.artist_id) {
             document.getElementById("artist-link").addEventListener("click", function() {
                 showArtist(artwork.artist_id)
+                })
+            }
+            })
+        .catch(function(error) {
+            detailView.innerHTML = "<p>Could not load artwork details. Please try again.</p>"
+        })
+}
+
+function showArtist(artist_id) {
+    let detailView = document.getElementById("detail-view")
+    let artistView = document.getElementById("artist-view")
+    detailView.style.display = "none"
+    artistView.style.display = "block"
+
+    fetch("https://api.artic.edu/api/v1/agents/" + artist_id + "?fields=title,birth_date,death_date,description")
+        .then(function(response) {
+            return response.json()
+        })
+        .then(function(data) {
+            let artist = data.data
+            artistView.innerHTML = `
+                <button id="back-to-artwork">← Back to Artwork</button>
+                <h2>${artist.title || "Unknown Artist"}</h2>
+                <p><strong>Born:</strong> ${artist.birth_date || "Unknown"}</p>
+                <p><strong>Died:</strong> ${artist.death_date || "Unknown"}</p>
+                <p>${artist.description || "No description available."}</p>
+            `
+            document.getElementById("back-to-artwork").addEventListener("click", function() {
+                artistView.style.display = "none"
+                detailView.style.display = "block"
             })
         })
         .catch(function(error) {
-            detailView.innerHTML = "<p>Could not load artwork details. Please try again.</p>"
+            artistView.innerHTML = "<p>Could not load artist details. Please try again.</p>"
         })
 }
 

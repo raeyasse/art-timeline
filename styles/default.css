@@ -1,3 +1,9 @@
 #detail-view{
     display: none;
 }
+
+#artist-link {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
