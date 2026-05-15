@@ -535,6 +535,7 @@ header::after {
 
   .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); padding: 20px 20px 80px; }
   .gallery-header { padding: 24px 20px; }
+<<<<<<< HEAD
 }
 
 <<<<<<< HEAD
@@ -564,3 +565,6 @@ footer {
   color: #000000;
 }
 >>>>>>> parent of ba6072a (updated css)
+=======
+}
+>>>>>>> parent of 3c8e22e (updated css)
