@@ -204,7 +204,7 @@ galleryOverlay.addEventListener("click", e => {
 function showDetail(id) {
   lastDetailId = id;
   detailView.innerHTML = `<div class="detail-inner"><p style="grid-column:1/-1;color:var(--text-muted)">Loading...</p></div>${COPYRIGHT_HTML}`;
-  show(detailView);
+  show(detailView, "flex");
   hide(artistView);
   document.body.style.overflow = "hidden";
 
@@ -247,8 +247,8 @@ function showDetail(id) {
               </div>
             </div>
             ${a.artist_id
-              ? `<button class="artist-btn" id="artist-btn">View Artist Profile</button>`
-              : ""}
+          ? `<button class="artist-btn" id="artist-btn">View Artist Profile</button>`
+          : ""}
           </div>
         </div>
         ${COPYRIGHT_HTML}
@@ -291,7 +291,7 @@ function showDetail(id) {
 
 function showArtist(artistId) {
   artistView.innerHTML = `<div class="artist-inner"><p style="color:var(--text-muted)">Loading...</p></div>${COPYRIGHT_HTML}`;
-  show(artistView);
+  show(artistView, "flex");
   hide(detailView);
 
   fetch(`https://api.artic.edu/api/v1/agents/${artistId}?fields=title,birth_date,death_date,description`)
@@ -307,10 +307,11 @@ function showArtist(artistId) {
             ${artist.birth_date ? `b. ${escapeHTML(artist.birth_date)}` : ""}
             ${artist.death_date ? ` - d. ${escapeHTML(artist.death_date)}` : ""}
           </div>
-          <p class="artist-desc">${artist.description || "No description available."}</p>
+          <div class="artist-desc">${artist.description || "No description available."}</div>
         </div>
         ${COPYRIGHT_HTML}
       `;
+      
 
       document.getElementById("artist-close").addEventListener("click", () => {
         hide(artistView);
@@ -360,3 +361,68 @@ buildTimeline().catch(err => {
   container.innerHTML = "<p style='color:var(--text-muted);padding:40px'>Could not load artwork data. Please try again later.</p>";
   console.error(err);
 });
+
+
+const blobSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+blobSVG.style.cssText = `
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
+  overflow: visible;
+  pointer-events: all;
+`;
+blobSVG.innerHTML = `
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#CF1259" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#CF1259" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path id="blob-path" fill="url(#bg)" opacity="0.3"/>
+`;
+galleryOverlay.appendChild(blobSVG);
+
+const path = document.getElementById('blob-path');
+const cx = 250, cy = 250;
+const POINTS = 8;
+let phase = 0, intensity = 22, targetIntensity = 22, opacity = 0.3, targetOpacity = 0.3;
+
+function blobPoint(i, t, intensity) {
+  const angle = (i / POINTS) * Math.PI * 2;
+  const r = 160 + Math.sin(t * 0.8 + i * 1.3) * intensity
+    + Math.cos(t * 0.5 + i * 2.1) * intensity * 0.6;
+  return [cx + Math.cos(angle) * r, cy + Math.sin(angle) * r];
+}
+
+function catmullRom(pts) {
+  let d = `M ${pts[0][0]} ${pts[0][1]}`;
+  const n = pts.length;
+  for (let i = 0; i < n; i++) {
+    const p0 = pts[(i - 1 + n) % n];
+    const p1 = pts[i];
+    const p2 = pts[(i + 1) % n];
+    const p3 = pts[(i + 2) % n];
+    const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
+    const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
+    const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
+    const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
+    d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2[0]} ${p2[1]}`;
+  }
+  return d + ' Z';
+}
+
+function animate() {
+  phase += 0.008 + (intensity - 22) * 0.001;
+  intensity += (targetIntensity - intensity) * 0.05;
+  opacity += (targetOpacity - opacity) * 0.08;
+  const pts = Array.from({ length: POINTS }, (_, i) => blobPoint(i, phase, intensity));
+  path.setAttribute('d', catmullRom(pts));
+  path.setAttribute('opacity', opacity);
+  requestAnimationFrame(animate);
+}
+
+path.addEventListener('mouseenter', () => { targetIntensity = 55; targetOpacity = 1; });
+path.addEventListener('mouseleave', () => { targetIntensity = 22; targetOpacity = 0; });
+
+animate();

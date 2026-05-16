@@ -101,8 +101,8 @@ header h1 {
   cursor: pointer;
 }
 
-.century-section:nth-child(odd) { margin-top: -60px; }
-.century-section:nth-child(even) { margin-top: 60px; }
+.century-section:nth-child(odd) { margin-top: -75px; }
+.century-section:nth-child(even) { margin-top: 75px; }
 
 .century-section::before {
   content: '';
@@ -124,7 +124,7 @@ header h1 {
 
 .century-year {
   margin-bottom: 10px;
-  color: var(--text-muted);
+  color: #FAF0CA;
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -137,12 +137,12 @@ header h1 {
   padding: 24px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: rgba(22, 22, 22, 0.92);
+  background: #092A48;
   transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease, border-color 0.3s;
 }
 
 .century-card:hover {
-  border-color: rgba(201, 169, 110, 0.3);
+  border-color: rgba(253, 179, 41, 0.3);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(201, 169, 110, 0.05);
   transform: translateY(-4px);
 }
@@ -157,7 +157,7 @@ header h1 {
 
 .century-card .date-range {
   margin-bottom: 20px;
-  color: var(--text-muted);
+  color: #FAF0CA;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
 }
@@ -176,7 +176,7 @@ header h1 {
   height: 190px;
   object-fit: cover;
   border-radius: 10px;
-  background: var(--surface-2);
+  background: #384147;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   transform: translateX(-50%);
   transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease, box-shadow 0.4s;
@@ -209,7 +209,7 @@ header h1 {
 
 .card-cta {
   margin-top: 56px;
-  color: var(--accent);
+  color: #FAF0CA;
   font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-align: center;
@@ -231,9 +231,9 @@ header h1 {
   display: none;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 45%, rgba(201, 169, 110, 0.13), transparent 22rem),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.035), transparent 34rem),
-    rgba(8, 8, 8, 0.97);
+
+    
+    rgba(0, 0, 0, 0.97);
   backdrop-filter: blur(20px);
   animation: fadeIn 0.35s ease;
 }
@@ -260,7 +260,7 @@ header h1 {
 }
 
 .gallery-header .date-range {
-  color: var(--text-muted);
+  color: #FAF0CA;
   font-size: 0.8rem;
   letter-spacing: 0.15em;
 }
@@ -273,7 +273,7 @@ header h1 {
   place-items: center;
   border: 1px solid var(--border);
   border-radius: 50%;
-  background: rgba(14, 14, 14, 0.55);
+  background: #092A48;
   color: var(--text);
   cursor: pointer;
   font-size: 1.1rem;
@@ -286,8 +286,8 @@ header h1 {
 
 .gallery-close:hover,
 .detail-close:hover {
-  border-color: var(--accent);
-  background: var(--accent-dim);
+  border-color: white;
+  background: #0f3e69;
 }
 
 .gallery-grid {
@@ -299,19 +299,7 @@ header h1 {
   overflow: hidden;
 }
 
-.gallery-grid::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(58vw, 620px);
-  height: min(58vw, 620px);
-  border-radius: 44% 56% 52% 48%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 58%);
-  box-shadow: 0 0 120px rgba(0, 0, 0, 0.55);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-}
+
 
 .gallery-carousel {
   position: absolute;
@@ -351,7 +339,7 @@ header h1 {
   inset: -28px;
   border-radius: 30px;
   background:
-    radial-gradient(circle at 50% 44%, rgba(201, 169, 110, 0.42), rgba(98, 127, 137, 0.18) 44%, transparent 72%);
+    radial-gradient(circle at 50% 44%, rgba(255, 166, 0, 0.42), rgba(98, 127, 137, 0.18) 44%, transparent 72%);
   filter: blur(12px);
   opacity: 0;
   pointer-events: none;
@@ -390,7 +378,7 @@ header h1 {
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 18px;
-  background: rgba(22, 22, 22, 0.92);
+  background:black;
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   transform: rotate(var(--r)) scale(var(--s));
@@ -400,8 +388,8 @@ header h1 {
 .gallery-item:hover,
 .gallery-item:focus-visible {
   z-index: 5;
-  border-color: rgba(201, 169, 110, 0.72);
-  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.72), 0 0 52px rgba(201, 169, 110, 0.28);
+  border-color: rgba(200, 164, 98, 0.72);
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.72), 0 0 52px rgba(214, 168, 81, 0.28);
   filter: saturate(1.12) contrast(1.04);
   outline: none;
   transform: rotate(var(--r)) scale(calc(var(--s) + 0.22));
@@ -445,17 +433,20 @@ header h1 {
 }
 
 .gallery-item-title {
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   font-family: 'Cormorant Garamond', serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.15;
+  line-height: 1;
+  color: white;
 }
 
 .gallery-item-artist {
-  color: rgba(232, 228, 220, 0.68);
-  font-size: 0.68rem;
+  display: block;
+  color: #FAF0CA;
+  font-size: 0.50rem;
   letter-spacing: 0.08em;
+  margin-top: 5px;
 }
 
 #detail-view,
@@ -464,13 +455,13 @@ header h1 {
   inset: 0;
   display: none;
   overflow-y: auto;
-  background: rgba(8, 8, 8, 0.98);
+  background: rgba(0, 0, 0, 0.98);
   backdrop-filter: blur(30px);
   animation: fadeIn 0.3s ease;
 }
 
 #detail-view { z-index: 300; }
-#artist-view { z-index: 400; background: rgba(8, 8, 8, 0.99); }
+#artist-view { z-index: 400; background: rgba(0, 0, 0, 0.99); }
 
 .detail-inner {
   display: grid;
@@ -498,7 +489,7 @@ header h1 {
   padding: 0;
   border: none;
   background: none;
-  color: var(--text-muted);
+  color: #FAF0CA;
   cursor: pointer;
   font-family: 'Jost', sans-serif;
   font-size: 0.75rem;
@@ -507,12 +498,12 @@ header h1 {
   transition: color 0.2s;
 }
 
-.detail-back:hover { color: var(--accent); }
+.detail-back:hover { color: #CF1259; }
 
 .detail-image-col img {
   width: 100%;
   border-radius: var(--radius);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6)
 }
 
 .detail-info-col h2 {
@@ -539,7 +530,7 @@ header h1 {
 }
 
 .detail-meta-label {
-  color: var(--text-muted);
+  color: #FAF0CA;
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -549,10 +540,10 @@ header h1 {
 
 .artist-btn {
   padding: 10px 20px;
-  border: 1px solid var(--border);
+  border: 1px solid #000000;
   border-radius: 6px;
   background: none;
-  color: var(--accent);
+  color: white;
   cursor: pointer;
   font-family: 'Jost', sans-serif;
   font-size: 0.8rem;
@@ -562,8 +553,8 @@ header h1 {
 }
 
 .artist-btn:hover {
-  border-color: var(--accent);
-  background: var(--accent-dim);
+  border-color: #CF1259;
+
 }
 
 .artist-inner {
@@ -581,13 +572,13 @@ header h1 {
 
 .artist-dates {
   margin-bottom: 40px;
-  color: var(--accent);
+  color:white;
   font-size: 0.8rem;
   letter-spacing: 0.15em;
 }
 
 .artist-desc {
-  color: rgba(232, 228, 220, 0.8);
+  color: white;
   font-size: 1rem;
   line-height: 1.8;
 }
@@ -611,7 +602,7 @@ footer {
   bottom: 0;
   z-index: 20;
   padding: 16px 20px;
-  background: linear-gradient(to top, rgba(8, 8, 8, 0.82), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.82), transparent);
   color: var(--text-muted);
   font-size: 0.75rem;
   text-align: center;
@@ -708,4 +699,14 @@ footer {
     gap: 32px;
     padding: 80px 24px;
   }
+}
+
+.artist-desc a {
+  color: #CF1259;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.artist-desc a:hover {
+  color: #FF2070;
 }
